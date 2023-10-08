@@ -148,7 +148,7 @@ int main(int argc, char **argv)
   node->declare_parameter<std::string>("port");
   node->declare_parameter<std::string>("frame_id");
 
-  node->get_parameter_or<std::string>("port", port, "/dev/ttyUSB0");
+  node->get_parameter_or<std::string>("port", port, "/dev/ttyUSB1");
   node->get_parameter_or<std::string>("frame_id", frame_id, "laser_frame");
 
   baud_rate = 230400;
