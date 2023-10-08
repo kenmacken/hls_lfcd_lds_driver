@@ -23,6 +23,7 @@ endif()
 ################################################################################
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(tf2_ros REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(Boost REQUIRED system)
 
@@ -35,12 +36,20 @@ include_directories(
 )
 
 add_executable(hlds_laser_publisher	src/hlds_laser_publisher.cpp)
+add_executable(lidar_tf_broadcaster	src/lidar_tf_broadcaster.cpp)
 target_link_libraries(hlds_laser_publisher ${Boost_LIBRARIES})
+target_link_libraries(lidar_tf_broadcaster ${Boost_LIBRARIES})
 ament_target_dependencies(hlds_laser_publisher
   rclcpp
   std_msgs
   sensor_msgs
 )
+
+ament_target_dependencies(lidar_tf_broadcaster
+  rclcpp
+  tf2_ros
+)
+
 
 ################################################################################
 # Install
@@ -50,7 +59,7 @@ install(DIRECTORY launch rviz
 )
 
 install(
-  TARGETS hlds_laser_publisher
+  TARGETS hlds_laser_publisher lidar_tf_broadcaster
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -60,5 +69,6 @@ install(
 ament_export_dependencies(rclcpp)
 ament_export_dependencies(std_msgs)
 ament_export_dependencies(sensor_msgs)
+ament_export_dependencies(tf2_ros)
 ament_export_include_directories(include)
 ament_package()

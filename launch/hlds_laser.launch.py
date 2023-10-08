@@ -29,7 +29,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     port = LaunchConfiguration('port', default='/dev/ttyUSB0')
 
-    frame_id = LaunchConfiguration('frame_id', default='laser')
+    frame_id = LaunchConfiguration('frame_id', default='laser_frame')
 
     return LaunchDescription([
 
@@ -41,7 +41,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'frame_id',
             default_value=frame_id,
-            description='Specifying frame_id of lidar. Default frame_id is \'laser\''),
+            description='Specifying frame_id of lidar. Default frame_id is \'laser_frame\''),
 
         Node(
             package='hls_lfcd_lds_driver',
@@ -49,4 +49,5 @@ def generate_launch_description():
             name='hlds_laser_publisher',
             parameters=[{'port': port, 'frame_id': frame_id}],
             output='screen'),
+
     ])

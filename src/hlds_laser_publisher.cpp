@@ -149,7 +149,7 @@ int main(int argc, char **argv)
   node->declare_parameter<std::string>("frame_id");
 
   node->get_parameter_or<std::string>("port", port, "/dev/ttyUSB0");
-  node->get_parameter_or<std::string>("frame_id", frame_id, "laser");
+  node->get_parameter_or<std::string>("frame_id", frame_id, "laser_frame");
 
   baud_rate = 230400;
 
@@ -159,7 +159,7 @@ int main(int argc, char **argv)
   try
   {
     hls_lfcd_lds::LFCDLaser laser(port, baud_rate, io);
-    laser_pub = node->create_publisher<sensor_msgs::msg::LaserScan>("scan", rclcpp::QoS(rclcpp::SensorDataQoS()));
+    laser_pub = node->create_publisher<sensor_msgs::msg::LaserScan>("scan", rclcpp::QoS(rclcpp::BestEffortReliability()) );
 
     while (rclcpp::ok())
     {
