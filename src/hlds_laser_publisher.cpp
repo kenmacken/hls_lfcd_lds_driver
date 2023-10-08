@@ -159,7 +159,7 @@ int main(int argc, char **argv)
   try
   {
     hls_lfcd_lds::LFCDLaser laser(port, baud_rate, io);
-    laser_pub = node->create_publisher<sensor_msgs::msg::LaserScan>("scan", rclcpp::QoS(rclcpp::BestEffortReliability()) );
+    laser_pub = node->create_publisher<sensor_msgs::msg::LaserScan>("scan", rclcpp::QoS(rclcpp::SensorDataQoS()));
 
     while (rclcpp::ok())
     {
