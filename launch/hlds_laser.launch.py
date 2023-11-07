@@ -27,7 +27,7 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
-    port = LaunchConfiguration('port', default='/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.3:1.0-port0')
+    port = LaunchConfiguration('port', default='/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0')
 
     frame_id = LaunchConfiguration('frame_id', default='laser_frame')
 
